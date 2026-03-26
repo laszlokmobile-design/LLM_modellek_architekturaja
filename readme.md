@@ -124,7 +124,7 @@ sequenceDiagram
 ```
 
 ## 5. Megvalósított funkciók listája
-* [ ] Üzenetküldés és fogadás: Alapfeltétel a kommunikációhoz.
+* [_] Üzenetküldés és fogadás: Alapfeltétel a kommunikációhoz.
 * [ ] Aszinkron hívások: A háttérfolyamatok nem blokkolják az alkalmazást.
 * [ ] Streaming válaszgenerálás: A szöveg folyamatosan, gépelés-szerűen jelenik meg.
 * [ ] Kontextuskezelés: A modell rálát az előző üzenetekre és válaszokra.
