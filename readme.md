@@ -95,6 +95,33 @@ classDiagram
         +int total_tokens
     }
 
+### 4.5. UML Szekvenciadiagram (Üzenetküldési folyamat)
+Az alábbi ábra az üzenetküldés és a válaszgenerálás folyamatát mutatja be az aszinkron streaming és az adatbázis-mentés figyelembevételével:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as Felhasználó (React)
+    participant S as Szerver (FastAPI)
+    participant DB as Adatbázis (SQLite)
+    participant AI as Google Gemini API
+
+    U->>S: Üzenet küldése (Prompt + Paraméterek)
+    S->>S: Moderációs ellenőrzés (Safety Filter)
+    S->>DB: Felhasználói üzenet mentése
+    S->>DB: Előzmények lekérdezése (Kontextus)
+    S->>AI: Prompt + Előzmények küldése
+    
+    loop Streaming folyamat
+        AI-->>S: Válasz töredék (Chunk)
+        S-->>U: Töredék továbbítása (SSE/Stream)
+    end
+
+    S->>S: Válasz validálása (Önjavítás)
+    S->>DB: Teljes AI válasz mentése
+    S->>DB: Tokenhasználat (Usage) mentése
+    S-->>U: Folyamat lezárása
+
 ## 5. Megvalósított funkciók listája
 * [ ] Üzenetküldés és fogadás: Alapfeltétel a kommunikációhoz.
 * [ ] Aszinkron hívások: A háttérfolyamatok nem blokkolják az alkalmazást.
