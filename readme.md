@@ -23,6 +23,27 @@ Az alkalmazás moduláris felépítésű, az alábbi rétegekre tagolva:
    - > Tokenhasználat: Minden API hívás után elmentjük a prompt_tokens, completion_tokens és total_tokens értékeket az adott beszélgetéshez rendelve.
 5.  **Komponensek elkülönítése:** A különböző modulok külön fájlokba, osztályokba, könyvtárakba vannak szervezve.
 
+### 3.1. Prompt Engineering és Biztonság
+
+Az alkalmazás dedikált rendszerüzeneteket (System Prompt) használ a modell viselkedésének szabályozására és a válaszok minőségének biztosítására.
+
+#### Részletes System Prompt
+A központi System Prompt az alábbi struktúrát követi a hatékony interakció érdekében:
+Szerepkör meghatározása: "Te egy professzionális, segítőkész AI asszisztens vagy, aki szoftverfejlesztési és általános kérdésekben nyújt támogatást." 
+Formátumra vonatkozó instrukciók: "A válaszaidat minden esetben Markdown formátumban add meg. A kódrészleteket szintaxiskiemeléssel (code block) lásd el." 
+Nyelvi korlátok: "Alapértelmezés szerint magyar nyelven válaszolj, kivéve, ha a felhasználó más nyelven kérdez."
+Stílus: "Legyél tömör, de lényegre törő. Kerüld a felesleges udvariassági köröket, fókuszálj a technikai pontosságra."
+
+#### LLM-alapú Moderáció
+A biztonsági követelményeknek megfelelően minden felhasználói bemenet egy előzetes moderációs szűrőn megy keresztül:
+Cél: A "Prompt Injection" támadások és a nem megfelelő tartalom kiszűrése válaszgenerálás előtt.
+Működés: Egy különálló, kisméretű LLM hívás elemzi a promptot. Ha az károsnak minősül, a rendszer megtagadja a válaszadást.
+
+#### Önjavító mechanizmus
+A minőségellenőrzés érdekében a generált válaszokat a háttérben egy kontroll-hívás ellenőrzi:
+Relevancia vizsgálat: Egy második LLM hívás veti össze a választ az eredeti kérdéssel.
+Korrekció: Amennyiben a válasz irreleváns vagy hibás formátumú, a rendszer automatikusan újragenerálja azt a hiba megjelölésével.
+
 ## 4. Adatmodell és Tervezés
 * **Beszélgetések:** Tárolja a beszélgetések egyedi azonosítóját, címét és dátumát.
 * **Üzenetek:** Mentésre kerülnek a felhasználói promptok és az LLM válaszok a kontextuskezeléshez.
@@ -153,3 +174,8 @@ sequenceDiagram
 ├── README.md           # Ez a fájl, amit most véglegesítettünk
 └── .gitignore          # Hogy a .env és a chat.db ne kerüljön fel a GitHubra
 ```
+## 7. Telepítés és futtatás
+1. Klónozd a repository-t.
+2. Hozz létre egy `.env` fájlt a `/backend` mappában a `GOOGLE_API_KEY` kulcsoddal.
+3. Backend indítása: `pip install -r requirements.txt` -> `fastapi dev main.py`
+4. Frontend indítása: `npm install` -> `npm run dev`
