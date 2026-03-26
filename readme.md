@@ -64,7 +64,7 @@ Az id mezők mindenhol elsődleges kulcsok (PK).
 A Messages.conv_id külső kulcsként (FK) kapcsolódik a Conversations.id-hoz (egy beszélgetésnek több üzenete van).
 Az UsageStats.msg_id külső kulcsként (FK) kapcsolódik a Messages.id-hoz (minden AI válaszhoz tartozik egy mérés).
 
-## 5. Megvalósított funkciók (Pontozási lista)
+## 5. Megvalósított funkciók listája
 * [ ] Üzenetküldés és fogadás: Alapfeltétel a kommunikációhoz.
 * [ ] Aszinkron hívások: A háttérfolyamatok nem blokkolják az alkalmazást.
 * [ ] Streaming válaszgenerálás: A szöveg folyamatosan, gépelés-szerűen jelenik meg.
