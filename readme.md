@@ -121,6 +121,7 @@ sequenceDiagram
     S->>DB: Teljes AI válasz mentése
     S->>DB: Tokenhasználat (Usage) mentése
     S-->>U: Folyamat lezárása
+```
 
 ## 5. Megvalósított funkciók listája
 * [ ] Üzenetküldés és fogadás: Alapfeltétel a kommunikációhoz.
