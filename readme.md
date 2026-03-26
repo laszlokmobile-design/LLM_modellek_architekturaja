@@ -8,7 +8,7 @@ A projekt célja egy olyan webes chatalkalmazás létrehozása, amely közvetlen
 
 ## 2. Alkalmazott technológiák
 * **Frontend:** React.js (dinamikus paraméterállítás és streaming megjelenítés).
-* **Backend:** Python FastAPI / Node.js (aszinkron API hívások kezelése).
+* **Backend:** Python FastAPI (aszinkron handler-ek és httpx/openai-streaming kliens).
 * **Adatbázis:** SQLite (beszélgetések és tokenhasználat perzisztens tárolása).
 * **LLM API:** Google Gemini API.
 
@@ -147,7 +147,7 @@ sequenceDiagram
 ## 5. Megvalósított funkciók listája
 * [ ] Üzenetküldés és fogadás: Alapfeltétel a kommunikációhoz.
 * [ ] Aszinkron hívások: A háttérfolyamatok nem blokkolják az alkalmazást.
-* [ ] Streaming válaszgenerálás: A szöveg folyamatosan, gépelés-szerűen jelenik meg.
+* [ ] Streaming válaszgenerálás: A szöveg folyamatosan, gépelés-szerűen jelenik meg (Server-Sent Events - SSE technológiával).
 * [ ] Kontextuskezelés: A modell rálát az előző üzenetekre és válaszokra.
 * [ ] Dinamikus hiperparaméterek: Temperature, Top-P és egyéb értékek állíthatósága a UI-on.
 * [ ] Tokenhasználat naplózása: Minden hívás után mentésre kerül az elhasznált mennyiség.
