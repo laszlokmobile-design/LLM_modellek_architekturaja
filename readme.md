@@ -1,6 +1,7 @@
 # Nagy Nyelvi Modell Csevegő Alkalmazás - Projektmunka
 **Készítette:** Kovács László
 **Kurzus:** LLM és GPT modellek architektúrája, működése és alkalmazása a szoftverfejlesztésben
+**Oktató:** Sárosi Gábor
 
 ## 1. Projekt célkitűzése
 A projekt célja egy olyan webes chatalkalmazás létrehozása, amely közvetlen API kapcsolatot létesít nagy nyelvi modellekkel (a feladatban Google Gemini). Az alkalmazás támogatja a modern AI-interakciók alapkövetelményeit, mint a streaming válaszadás és a kontextusfüggő beszélgetés. 
@@ -63,6 +64,36 @@ Kapcsolati logika:
 Az id mezők mindenhol elsődleges kulcsok (PK).
 A Messages.conv_id külső kulcsként (FK) kapcsolódik a Conversations.id-hoz (egy beszélgetésnek több üzenete van).
 Az UsageStats.msg_id külső kulcsként (FK) kapcsolódik a Messages.id-hoz (minden AI válaszhoz tartozik egy mérés).
+
+### 4.4. UML Osztálydiagram
+Az alábbi diagram szemlélteti az adatbázis-struktúrát és a táblák közötti kapcsolatokat:
+
+```mermaid
+classDiagram
+    Conversation "1" -- "*" Message : has
+    Message "1" -- "1" UsageStats : records
+    
+    class Conversation {
+        +int id
+        +string title
+        +float temperature
+        +float top_p
+        +datetime created_at
+    }
+    class Message {
+        +int id
+        +int conv_id
+        +string role
+        +string content
+        +string file_path
+    }
+    class UsageStats {
+        +int id
+        +int msg_id
+        +int prompt_tokens
+        +int completion_tokens
+        +int total_tokens
+    }
 
 ## 5. Megvalósított funkciók listája
 * [ ] Üzenetküldés és fogadás: Alapfeltétel a kommunikációhoz.
