@@ -136,6 +136,7 @@ sequenceDiagram
 * [ ] Minőségellenőrzés (Önjavítás): Válaszok relevanciájának gépi ellenőrzése.
 
 ## 6. Fájlstruktúra
+```text
 /llm-chat-projekt
 │
 ├── /backend            # Python FastAPI kód
@@ -151,3 +152,4 @@ sequenceDiagram
 │
 ├── README.md           # Ez a fájl, amit most véglegesítettünk
 └── .gitignore          # Hogy a .env és a chat.db ne kerüljön fel a GitHubra
+```
