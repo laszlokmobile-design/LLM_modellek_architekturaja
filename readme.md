@@ -27,6 +27,45 @@ Az alkalmazás moduláris felépítésű, az alábbi rétegekre tagolva:
 * **Üzenetek:** Mentésre kerülnek a felhasználói promptok és az LLM válaszok a kontextuskezeléshez.
 * **Token mérés:** Minden hívás után mentjük a `prompt_tokens` és `completion_tokens` értékeket.
 
+## 4. Adatmodell és Adatbázisterv (SQLite)
+
+Az alkalmazás az adatokat három fő táblában tárolja az összefüggések biztosítása érdekében:
+
+### 4.1. Conversations (Beszélgetések)
+Ez a tábla fogja össze az összetartozó üzeneteket.
+| Oszlop neve | Típus | Leírás |
+| :--- | :--- | :--- |
+| `id` | INTEGER (PK) | Egyedi azonosító |
+| `title` | TEXT | A beszélgetés címe (pl. az első kérdés eleje) |
+| temperature | FLOAT | A modell kreativitásának beállítása |
+| top_p | FLOAT | A válogatási valószínűség beállítása |
+| `created_at` | DATETIME | A beszélgetés indításának időpontja |
+
+### 4.2. Messages (Üzenetek)
+Itt tároljuk a teljes chat-folyamot a kontextuskezeléshez.
+| Oszlop neve | Típus | Leírás |
+| :--- | :--- | :--- |
+| `id` | INTEGER (PK) | Egyedi azonosító |
+| `conv_id` | INTEGER (FK) | Hivatkozás a beszélgetésre |
+| `role` | TEXT | 'user' (felhasználó) vagy 'assistant' (AI) |
+| `content` | TEXT | Az üzenet szöveges tartalma |
+| `file_path` | TEXT | Opcionális: a csatolt kép/PDF elérési útja |
+
+### 4.3. UsageStats (Tokenhasználat)
+Ebben a táblában naplózzuk a költségeket/használatot.
+| Oszlop neve | Típus | Leírás |
+| :--- | :--- | :--- |
+| `id` | INTEGER (PK) | Egyedi azonosító |
+| `msg_id` | INTEGER (FK) | Melyik válaszhoz tartozik a mérés |
+| `prompt_tokens` | INTEGER | A bemeneti tokenek száma |
+| `completion_tokens`| INTEGER | A generált válasz tokenjei |
+| `total_tokens` | INTEGER | Összesített felhasználás |
+
+Kapcsolati logika:
+Az id mezők mindenhol elsődleges kulcsok (PK).
+A Messages.conv_id külső kulcsként (FK) kapcsolódik a Conversations.id-hoz (egy beszélgetésnek több üzenete van).
+Az UsageStats.msg_id külső kulcsként (FK) kapcsolódik a Messages.id-hoz (minden AI válaszhoz tartozik egy mérés).
+
 ## 5. Megvalósított funkciók (Pontozási lista)
 * [ ] Üzenetküldés és fogadás: Alapfeltétel a kommunikációhoz.
 * [ ] Aszinkron hívások: A háttérfolyamatok nem blokkolják az alkalmazást.
