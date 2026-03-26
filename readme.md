@@ -94,7 +94,7 @@ classDiagram
         +int completion_tokens
         +int total_tokens
     }
-
+```
 ### 4.5. UML Szekvenciadiagram (Üzenetküldési folyamat)
 Az alábbi ábra az üzenetküldés és a válaszgenerálás folyamatát mutatja be az aszinkron streaming és az adatbázis-mentés figyelembevételével:
 
