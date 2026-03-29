@@ -44,7 +44,7 @@ async def run_moderation(user_input: str):
 
 async def run_self_correction(original_prompt: str, ai_response: str):
     """Önjavító mechanizmus (0,4 pont)."""
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel("gemini-2.5-flash")
     prompt = f"Kérdés: {original_prompt}\nVálasz: {ai_response}\nReleváns a válasz? Válaszolj: YES/NO."
     check = await model.generate_content_async(prompt)
     return "YES" in check.text.upper()
@@ -95,7 +95,7 @@ async def chat_stream(request: schemas.ChatRequest, db: Session = Depends(get_db
 
     # 4. Előzmények lekérése
     history = get_history(db, conv_id)
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel("gemini-2.5-flash")
     chat = model.start_chat(history=history)
 
     # --- FÁJLKEZELÉS ELŐKÉSZÍTÉSE (Ezt illesztettük be) ---
