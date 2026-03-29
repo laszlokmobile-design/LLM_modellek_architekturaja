@@ -235,6 +235,7 @@ function App() {
               <div
                 className={`max-w-[75%] p-4 rounded-2xl shadow-sm ${msg.role === "user" ? "bg-blue-600 text-white rounded-tr-none" : "bg-white border rounded-tl-none"}`}
               >
+                {/* Fejléc (Ikon + Név) */}
                 <div className="flex items-center gap-2 mb-1 opacity-70 text-xs font-bold uppercase">
                   {msg.role === "user" ? (
                     <>
@@ -246,9 +247,23 @@ function App() {
                     </>
                   )}
                 </div>
+
+                {/* Üzenet szövege */}
                 <p className="whitespace-pre-wrap leading-relaxed">
                   {msg.content}
                 </p>
+
+                {/* ÚJ: Fájl ikon megjelenítése CSAK a felhasználó üzeneténél, ha épp küldtünk egyet */}
+                {msg.role === "user" &&
+                  fileBase64 &&
+                  i === messages.length - 2 && (
+                    <div className="mt-2 pt-2 border-t border-blue-400 flex items-center gap-2 text-xs italic">
+                      <div className="bg-blue-500 p-1 rounded text-white">
+                        📎
+                      </div>
+                      <span>Média csatolva</span>
+                    </div>
+                  )}
               </div>
             </div>
           ))}
@@ -266,36 +281,60 @@ function App() {
         </div>
 
         <footer className="p-4 bg-white border-t">
-          <form onSubmit={sendMessage} className="max-w-4xl mx-auto flex gap-2">
-            {/* Fájlválasztó gomb hozzáadása */}
-            <input
-              type="file"
-              id="file-upload"
-              className="hidden"
-              onChange={handleFileChange}
-              accept="image/*,application/pdf"
-            />
-            <label
-              htmlFor="file-upload"
-              className={`p-3 rounded-xl cursor-pointer ${fileBase64 ? "bg-green-100 text-green-600" : "bg-gray-100 text-gray-500"}`}
-            >
-              <Plus size={20} />
-            </label>
+          <form
+            onSubmit={sendMessage}
+            className="max-w-4xl mx-auto flex flex-col gap-2"
+          >
+            {/* ÚJ: Fájl indikátor, ha van kiválasztott fájl */}
+            {fileBase64 && (
+              <div className="flex items-center gap-2 px-3 py-1 bg-green-50 border border-green-200 rounded-lg w-fit ml-12 animate-in fade-in zoom-in-95">
+                <span className="text-xs font-medium text-green-700">
+                  Fájl csatolva
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setFileBase64(null)}
+                  className="text-green-700 hover:text-red-500 font-bold text-lg"
+                >
+                  ×
+                </button>
+              </div>
+            )}
 
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Írj egy üzenetet..."
-              className="flex-1 p-3 bg-gray-100 border-none rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="bg-blue-600 text-white p-3 rounded-xl"
-            >
-              <Send size={20} />
-            </button>
+            <div className="flex gap-2">
+              <input
+                type="file"
+                id="file-upload"
+                className="hidden"
+                onChange={handleFileChange}
+                accept="image/*,application/pdf"
+              />
+              <label
+                htmlFor="file-upload"
+                className={`p-3 rounded-xl cursor-pointer transition-colors ${fileBase64 ? "bg-green-500 text-white" : "bg-gray-100 text-gray-500 hover:bg-gray-200"}`}
+              >
+                <Plus size={20} />
+              </label>
+
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Írj egy üzenetet..."
+                className="flex-1 p-3 bg-gray-100 border-none rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={`p-3 rounded-xl transition-colors ${
+                  isLoading
+                    ? "bg-gray-300"
+                    : "bg-blue-600 text-white hover:bg-blue-700"
+                }`}
+              >
+                <Send size={20} />
+              </button>
+            </div>
           </form>
         </footer>
 
