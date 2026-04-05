@@ -127,7 +127,7 @@ sequenceDiagram
     participant DB as Adatbázis (SQLite)
     participant AI as Google Gemini API
 
-    U->>S: Üzenet küldése (Prompt + Paraméterek)
+    U->>S: Üzenet küldése (Prompt + Paraméterek + Fájl)
     S->>S: Moderációs ellenőrzés (Safety Filter)
     S->>DB: Felhasználói üzenet mentése
     S->>DB: Előzmények lekérdezése (Kontextus)
@@ -148,13 +148,13 @@ sequenceDiagram
 * [x] Üzenetküldés és fogadás: Alapfeltétel a kommunikációhoz.
 * [x] Aszinkron hívások: A háttérfolyamatok nem blokkolják az alkalmazást.
 * [x] Streaming válaszgenerálás: A szöveg folyamatosan, gépelés-szerűen jelenik meg (Server-Sent Events - SSE technológiával).
-* [ ] Kontextuskezelés: A modell rálát az előző üzenetekre és válaszokra.
+* [x] Kontextuskezelés: A modell rálát az előző üzenetekre és válaszokra.
 * [x] Dinamikus hiperparaméterek: Temperature, Top-P és egyéb értékek állíthatósága a UI-on.
 * [x] Tokenhasználat naplózása: Minden hívás után mentésre kerül az elhasznált mennyiség.
 * [x] Korábbi beszélgetések kezelése: Mentés, betöltés és megnyitás funkciók.
-* [ ] Multimodális bevitel: Kép vagy PDF fájl csatolásának lehetősége.
-* [ ] Biztonság (Moderáció): Prompt injection elleni védelem LLM segítséggel.
-* [ ] Minőségellenőrzés (Önjavítás): Válaszok relevanciájának gépi ellenőrzése.
+* [x] Multimodális bevitel: Kép vagy PDF fájl csatolásának lehetősége.
+* [x] Biztonság (Moderáció): Prompt injection elleni védelem LLM segítséggel.
+* [x] Minőségellenőrzés (Önjavítás): Válaszok relevanciájának gépi ellenőrzése.
 
 ## 6. Fájlstruktúra
 ```text
@@ -180,3 +180,8 @@ sequenceDiagram
 3. Alkalmazás indítása: run_app.py fájl futtatásával elindul a frontend és a backend.
 4. Használat: A jobb oldali beállítópanelen a Temperature csúszkával állítható a modell válaszainak változatossága (0.0: precíz, 1.0+: kreatív),
 míg a Top-P a valószínűségi mintavételezést szabályozza.
+
+### 7.1 Frontend telepítése
+1. Lépj be a frontend mappába: `cd frontend`
+2. Telepítsd a függőségeket: `npm install axios lucide-react`
+3. Indítás: `npm start`
