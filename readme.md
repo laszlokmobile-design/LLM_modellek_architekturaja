@@ -164,7 +164,7 @@ sequenceDiagram
 │   ├── main.py            # API végpontok, Gemini hívás, Streaming
 │   ├── database.py        # SQLite modellek és kapcsolat
 │   ├── schemas.py         # Pydantic modellek az adatokhoz
-│   ├── reqiurements.txt   # Függőségek telepítéséhez 
+│   ├── requirements.txt   # Függőségek telepítéséhez 
 │   └── .env               # Itt tárolom a GOOGLE_API_KEY-t
 │
 │
