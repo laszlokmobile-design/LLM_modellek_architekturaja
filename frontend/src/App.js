@@ -36,7 +36,7 @@ function App() {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => setFileBase64(reader.result.split(",")[1]);
+      reader.onloadend = () => setFileBase64(reader.result);
       reader.readAsDataURL(file);
     }
   };
@@ -142,9 +142,19 @@ function App() {
         }
       }
 
-      // Frissítjük a listát, ha új beszélgetés jött létre
-      if (!currentConvId) fetchConversations();
-    } catch (error) {
+// A sendMessage vége felé, a stream lefutása után:
+if (!currentConvId) {
+    // Lekérjük a friss listát
+    const res = await axios.get("http://127.0.0.1:8000/conversations");
+    setConversations(res.data);
+    if (res.data.length > 0) {
+        // A legfrissebb beszélgetés ID-ját beállítjuk aktuálisnak
+        setCurrentConvId(res.data[0].id);
+    }
+} else {
+    fetchConversations();
+}
+} catch (error) {
       console.error("Streaming hiba:", error);
       setMessages((prev) => [
         ...prev,
