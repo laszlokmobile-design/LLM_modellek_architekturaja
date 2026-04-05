@@ -160,19 +160,21 @@ sequenceDiagram
 ```text
 /llm-chat-projekt
 │
-├── /backend            # Python FastAPI kód
-│   ├── main.py         # API végpontok, Gemini hívás, Streaming
-│   ├── database.py     # SQLite modellek és kapcsolat
-│   ├── schemas.py      # Pydantic modellek az adatokhoz
-│   └── .env            # Itt tárolom a GOOGLE_API_KEY-t
+├── /backend               # Python FastAPI kód
+│   ├── main.py            # API végpontok, Gemini hívás, Streaming
+│   ├── database.py        # SQLite modellek és kapcsolat
+│   ├── schemas.py         # Pydantic modellek az adatokhoz
+│   ├── reqiurements.txt   # Függőségek telepítéséhez 
+│   └── .env               # Itt tárolom a GOOGLE_API_KEY-t
 │
-├── /frontend           # React (Vite) kód
+│
+├── /frontend              # React (Vite) kód
 │   ├── /src
-│   │   ├── components  # ChatWindow, Sidebar, Settings bar
+│   │   ├── components     # ChatWindow, Sidebar, Settings bar
 │   │   └── App.jsx
 │
-├── README.md           # Ez a fájl, amit most véglegesítettünk
-└── .gitignore          # Hogy a .env és a chat.db ne kerüljön fel a GitHubra
+├── README.md              # Ez a fájl, amit most véglegesítettünk
+└── .gitignore             # Hogy a .env és a chat.db ne kerüljön fel a GitHubra
 ```
 ## 7. Telepítés és futtatás
 1. Klónozd a repository-t.
