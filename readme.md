@@ -165,7 +165,7 @@ sequenceDiagram
 │   ├── database.py              # SQLite modellek és kapcsolat
 │   ├── schemas.py               # Pydantic modellek az adatokhoz
 │   ├── requirements.txt         # Függőségek telepítéséhez 
-│   └── .env                     # Itt kerül tárolásra a GOOGLE_API_KEY. Ezt létre kell hozni!
+│   └── .env.example             # Itt kerül tárolásra a GOOGLE_API_KEY. Ezt létre kell hozni!
 │
 │
 ├── /frontend                    # React (Vite) kód
