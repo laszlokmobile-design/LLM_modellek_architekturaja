@@ -207,7 +207,7 @@ sequenceDiagram
        Bash
        `pip install -r requirements.txt`
        Ez minden csomagot egyszerre felrak, amit a fenti listába írtunk.
-6. Hozz létre egy `.env` fájlt a `/backend` mappában a `GOOGLE_API_KEY` kulcsoddal.
+6. Nevezd át `.env.example` fájlt `.env.re`  a `/backend` mappában és a `GOOGLE_API_KEY` kulcsoddal egészítsd ki.
 
 
 ### 7.2 Frontend telepítése
