@@ -165,7 +165,7 @@ sequenceDiagram
 │   ├── database.py        # SQLite modellek és kapcsolat
 │   ├── schemas.py         # Pydantic modellek az adatokhoz
 │   ├── requirements.txt   # Függőségek telepítéséhez 
-│   └── .env               # Itt tárolom a GOOGLE_API_KEY-t
+│   └── .env               # Itt tárolom a GOOGLE_API_KEY-t. Ezt létre kell hozni!
 │
 │
 ├── /frontend              # React (Vite) kód
@@ -177,13 +177,31 @@ sequenceDiagram
 └── .gitignore             # Hogy a .env és a chat.db ne kerüljön fel a GitHubra
 ```
 ## 7. Telepítés és futtatás
+
+### 7.1 Backend telepítése
 1. Klónozd a repository-t.
-2. Hozz létre egy `.env` fájlt a `/backend` mappában a `GOOGLE_API_KEY` kulcsoddal.
-3. Alkalmazás indítása: run_app.py fájl futtatásával elindul a frontend és a backend.
-4. Használat: A jobb oldali beállítópanelen a Temperature csúszkával állítható a modell válaszainak változatossága (0.0: precíz, 1.0+: kreatív),
+2. PyCharm megnyitása: Nyisd meg a /backend mappát.
+3. Virtuális környezet (venv): Ha a PyCharm nem hozta létre automatikusan, a terminálban (IDE alján) futtasd:
+        ◦ Windows: python -m venv venv
+        ◦ Mac/Linux: python3 -m venv venv
+4. A venv aktiválása (ha szükséges):
+        ◦ Windows: venv\Scripts\activate
+        ◦ Mac/Linux: source venv/bin/activate
+5. Telepítés a fájlból: Ahelyett, hogy egyenként írnád be a neveket, futtasd ezt az egy parancsot:
+       Bash
+       pip install -r requirements.txt
+       Ez minden csomagot egyszerre felrak, amit a fenti listába írtunk.
+6. Hozz létre egy `.env` fájlt a `/backend` mappában a `GOOGLE_API_KEY` kulcsoddal.
+
+
+### 7.2 Frontend telepítése
+1. Klónozd a repository-t.
+2. Lépj be a frontend mappába: `cd frontend`
+3. Telepítsd a függőségeket: `npm install`
+
+
+### 7.3 Futtatás
+1. Alkalmazás indítása: run_app.py fájl futtatásával elindul a frontend és a backend. A run_app.py fájl a projekt gyökérkönyvtárában található.
+2. Használat: A jobb oldali beállítópanelen a Temperature csúszkával állítható a modell válaszainak változatossága (0.0: precíz, 1.0+: kreatív),
 míg a Top-P a valószínűségi mintavételezést szabályozza.
 
-### 7.1 Frontend telepítése
-1. Lépj be a frontend mappába: `cd frontend`
-2. Telepítsd a függőségeket: `npm install axios lucide-react`
-3. Indítás: `npm start`
