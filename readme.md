@@ -182,11 +182,11 @@ sequenceDiagram
 1. Klónozd a repository-t.
 2. PyCharm megnyitása: Nyisd meg a /backend mappát.
 3. Virtuális környezet (venv): Ha a PyCharm nem hozta létre automatikusan, a terminálban (IDE alján) futtasd:
-        ◦ Windows: python -m venv venv
-        ◦ Mac/Linux: python3 -m venv venv
+        ◦ Windows: `python -m venv venv`
+        ◦ Mac/Linux: `python3 -m venv venv`
 4. A venv aktiválása (ha szükséges):
-        ◦ Windows: venv\Scripts\activate
-        ◦ Mac/Linux: source venv/bin/activate
+        ◦ Windows: `venv\Scripts\activate`
+        ◦ Mac/Linux: `source venv/bin/activate`
 5. Telepítés a fájlból: Ahelyett, hogy egyenként írnád be a neveket, futtasd ezt az egy parancsot:
        Bash
        pip install -r requirements.txt
