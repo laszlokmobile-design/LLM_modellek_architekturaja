@@ -158,7 +158,7 @@ sequenceDiagram
 
 ## 6. Fájlstruktúra
 ```text
-/llm-chat-projekt
+/LLM_modellek_architekturaja
 │
 ├── /backend                     # Python FastAPI kód
 │   ├── main.py                  # API végpontok, Gemini hívás, Streaming
