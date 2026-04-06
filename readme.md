@@ -186,7 +186,7 @@ sequenceDiagram
 │   │   └── setupTests.js
 │   ├── package.json
 │   ├── package-lock.json
-│   ├── postcss.confog.js
+│   ├── postcss.config.js
 │   ├── README.md
 │   └── tailwind.config.js
 ├── run_app.py                   # Ez az indítófájl
