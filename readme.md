@@ -160,21 +160,37 @@ sequenceDiagram
 ```text
 /llm-chat-projekt
 │
-├── /backend               # Python FastAPI kód
-│   ├── main.py            # API végpontok, Gemini hívás, Streaming
-│   ├── database.py        # SQLite modellek és kapcsolat
-│   ├── schemas.py         # Pydantic modellek az adatokhoz
-│   ├── requirements.txt   # Függőségek telepítéséhez 
-│   └── .env               # Itt tárolom a GOOGLE_API_KEY-t. Ezt létre kell hozni!
+├── /backend                     # Python FastAPI kód
+│   ├── main.py                  # API végpontok, Gemini hívás, Streaming
+│   ├── database.py              # SQLite modellek és kapcsolat
+│   ├── schemas.py               # Pydantic modellek az adatokhoz
+│   ├── requirements.txt         # Függőségek telepítéséhez 
+│   └── .env                     # Itt tárolom a GOOGLE_API_KEY-t. Ezt létre kell hozni!
 │
 │
-├── /frontend              # React (Vite) kód
+├── /frontend                    # React (Vite) kód
+│   ├── /public
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   ├── logo192.png
+│   │   ├── logo512.png
+│   │   ├── manifest.json
+│   │   └── robots.txt
 │   ├── /src
-│   │   ├── components     # ChatWindow, Sidebar, Settings bar
-│   │   └── App.jsx
-│
-├── README.md              # Ez a fájl, amit most véglegesítettünk
-└── .gitignore             # Hogy a .env és a chat.db ne kerüljön fel a GitHubra
+│   │   ├── App.css     
+│   │   ├── App.js
+│   │   ├── index.css
+│   │   ├── index.js
+│   │   ├── logo.svg
+│   │   ├── reportWebVitals.js
+│   │   └── setupTests.js
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── postcss.confog.js
+│   ├── README.md
+│   └── tailwind.config.js
+├── run_app.py                   # Ez az indítófájl
+└── README.md                    # Ez a fájl, amit most olvasol.
 ```
 ## 7. Telepítés és futtatás
 
@@ -189,7 +205,7 @@ sequenceDiagram
         ◦ Mac/Linux: `source venv/bin/activate`
 5. Telepítés a fájlból: Ahelyett, hogy egyenként írnád be a neveket, futtasd ezt az egy parancsot:
        Bash
-       pip install -r requirements.txt
+       `pip install -r requirements.txt`
        Ez minden csomagot egyszerre felrak, amit a fenti listába írtunk.
 6. Hozz létre egy `.env` fájlt a `/backend` mappában a `GOOGLE_API_KEY` kulcsoddal.
 
