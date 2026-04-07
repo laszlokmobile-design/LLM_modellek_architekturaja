@@ -8,8 +8,17 @@ A projekt célja egy olyan webes chatalkalmazás létrehozása, amely közvetlen
 
 ## 2. Alkalmazott technológiák
 * **Frontend:** React.js (dinamikus paraméterállítás és streaming megjelenítés).
+Dinamikus felület: A felhasználó a UI-on keresztül állíthatja a modell paramétereit (Temperature, Top-P).
+Streaming: A válaszok Server-Sent Events (SSE) technológiával, valós időben érkeznek.
+Navigációs logika: A felület bal oldali oldalsávval rendelkezik, amely lehetővé teszi:
+   -   Új beszélgetések indítását egy kattintással.
+   -   A korábbi beszélgetések listázását és kiválasztását.
+   -   A meglévő beszélgetések folytatását a teljes kontextus visszatöltésével.
 * **Backend:** Python FastAPI (aszinkron handler-ek és httpx/openai-streaming kliens).
+   -   Aszinkron kiszolgálás: A FastAPI aszinkron endpointjai kezelik az LLM hívásokat, így a szerver több kérést is képes párhuzamosan kiszolgálni blokkolás nélkül.
+   -   LLM Integráció: Közvetlen kapcsolat a Google Gemini API-val.
 * **Adatbázis:** SQLite (beszélgetések és tokenhasználat perzisztens tárolása).
+   -   Perzisztens tárolás: Az SQLite biztosítja, hogy a beszélgetések és a tokenhasználati statisztikák az alkalmazás bezárása után is megmaradjanak.
 * **LLM API:** Google Gemini API.
 
 ## 3. Rendszerarchitektúra és Működés
@@ -57,8 +66,8 @@ Ez a tábla fogja össze az összetartozó üzeneteket.
 | :--- | :--- | :--- |
 | `id` | INTEGER (PK) | Egyedi azonosító |
 | `title` | TEXT | A beszélgetés címe (pl. az első kérdés eleje) |
-| temperature | FLOAT | A modell kreativitásának beállítása |
-| top_p | FLOAT | A válogatási valószínűség beállítása |
+| `temperature` | FLOAT | A modell kreativitásának beállítása |
+| `top_p` | FLOAT | A válogatási valószínűség beállítása |
 | `created_at` | DATETIME | A beszélgetés indításának időpontja |
 
 ### 4.2. Messages (Üzenetek)
@@ -207,7 +216,7 @@ sequenceDiagram
        Bash
        `pip install -r requirements.txt`
        Ez minden csomagot egyszerre felrak, amit a fenti listába írtunk.
-6. Nevezd át `.env.example` fájlt `.env.re`  a `/backend` mappában és a `GOOGLE_API_KEY` kulcsoddal egészítsd ki.
+6. Nevezd át `.env.example` fájlt `.env`-re  a `/backend` mappában és a `GOOGLE_API_KEY` kulcsoddal egészítsd ki.
 
 
 ### 7.2 Frontend telepítése
